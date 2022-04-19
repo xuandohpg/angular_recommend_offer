@@ -75,26 +75,40 @@
                 <div class="bs-stepper-content" *ngIf="isStatusForm=='general'">
                     <form class="form-horizontal">
                         <div class="row">
+
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="form-control-label">Traffic của bạn chủ yếu từ đâu?</label>
-<!--                                    <label class="form-control-label">Traffic Network</label>-->
-                                    <input name="socialNetwork" [(ngModel)]="trafficNetwork" (click)="clickInput('trafficNetwork')" (keyup)="onKeyTrafficNetwork($event)"  type="text" class="form-control text-lowercase"/>
-                                    <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.trafficNetwork.error && my_array_isToggle.trafficNetwork.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.trafficNetwork.error}}</small>
-                                        </ng-container>
+                                 <label class="form-control-label">Traffic của bạn chủ yếu từ đâu?</label>
+                                    <div class="form-group">
+                                      <ng-select
+                                        [items]="cars"
+                                        bindLabel="name" 
+                                        bindValue="id" 
+                                        [addTag]="true"
+                                        multiple="true"
+                                        placeholder="selected Car"
+                                        [(ngModel)]="selectedCar"
+                                        [ngModelOptions]="{standalone: true}"
+                                      >
+
+                                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label"> {{ item.name }}</span>
+                                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                      </ng-template>
+                                      </ng-select>
+                                      Selected value: {{ selectedCar | json }}
                                     </div>
-                                </div>
                             </div>
+
+
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Kinh nghiệm của bạn</label>
 <!--                                    <label class="form-control-label">Exp Affiliate</label>-->
                                     <select class="form-control" [(ngModel)]="exp" required (click)="clickInput('exp')"  name="exp">
                                         <option value="0">-- Choose Exp --</option>
-                                        <option value="1">1 năm</option>
-                                        <option value="2">2 năm</option>
+                                        <option value="1">Mới bắt đầu</option>
+                                        <option value="2">Đã có kinh nghiệm từ 1->2 năm</option>
+                                        <option value="1">Chuyên gia</option>
                                     </select>
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.exp.error && my_array_isToggle.exp.error!='error'">
@@ -106,20 +120,30 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-<!--                                    <label class="form-control-label">Scale</label>-->
-                                    <label class="form-control-label">Quy mô hệ thống traffic của bạn</label>
-                                    <select class="form-control" [(ngModel)]="scale" required (click)="clickInput('scale')"   name="scale">
-                                        <option value="0">-- Choose Scale --</option>
-                                        <option value="agency">Agency</option>
-                                        <option value="odd_pub">Odd Pub</option>
-                                    </select>
+                                    <label class="form-control-label">Số lượng đơn hàng theo ngày</label>
+<!--                                    <label class="form-control-label">Traffic Network</label>-->
+                                    <input name="socialNetwork" [(ngModel)]="trafficNetwork" (click)="clickInput('trafficNetwork')" (keyup)="onKeyTrafficNetwork($event)"  type="text" class="form-control text-lowercase"/>
                                     <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.scale.error && my_array_isToggle.scale.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.scale.error}}</small>
+                                        <ng-container *ngIf="my_array_isToggle.trafficNetwork.error && my_array_isToggle.trafficNetwork.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.trafficNetwork.error}}</small>
                                         </ng-container>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Độ tuổi hướng đến</label>
+<!--                                    <label class="form-control-label">Age</label>-->
+                                    <input name="age" [(ngModel)]="age" (click)="clickInput('age')" (keyup)="onKeyAge($event)" type="text" class="form-control text-lowercase"/>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.age.error && my_array_isToggle.age.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.age.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+  
                         </div>
                     </form>
 
@@ -197,18 +221,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="form-control-label">Độ tuổi hướng đến</label>
-<!--                                    <label class="form-control-label">Age</label>-->
-                                    <input name="age" [(ngModel)]="age" (click)="clickInput('age')" (keyup)="onKeyAge($event)" type="text" class="form-control text-lowercase"/>
-                                    <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.age.error && my_array_isToggle.age.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.age.error}}</small>
-                                        </ng-container>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="list-button">

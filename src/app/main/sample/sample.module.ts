@@ -12,6 +12,10 @@ import {  CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
+
+import { NgSelectModule } from '@ng-select/ng-select';
+
+
 const routes = [
   {
     path: 'recommend-offer',
@@ -27,7 +31,7 @@ const routes = [
 
 @NgModule({
   declarations: [SampleComponent, HomeComponent],
-  imports: [FormsModule,BrowserAnimationsModule,NgxSpinnerModule,RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule],
+  imports: [NgSelectModule,FormsModule,BrowserAnimationsModule,NgxSpinnerModule,RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule],
   exports: [SampleComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

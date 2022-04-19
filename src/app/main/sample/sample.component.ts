@@ -51,6 +51,14 @@ export class SampleComponent implements OnInit {
 
 
 
+      selectedCar: any;
+
+      cars = [
+          { id: 1, name: 'Facebook' },
+          { id: 2, name: 'Google' },
+          { id: 3, name: 'Tiktok' },
+      ];
+
     selectAddTagMethod(name) {
         return { name: name, tag: true };
     }
