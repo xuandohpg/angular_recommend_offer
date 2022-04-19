@@ -36,7 +36,7 @@ export class SampleComponent implements OnInit {
     public price:number;
     public trafficNetwork:string;
     public email:string;
-    public tags:string;
+    public tags:string='0';
     public country:string;
     public age:number;
     public socialNetwork:string;
@@ -48,6 +48,12 @@ export class SampleComponent implements OnInit {
     public lengthFormData:number=0;
     public idFormData:number=0;
     public my_array_isToggle:any;
+
+
+
+    selectAddTagMethod(name) {
+        return { name: name, tag: true };
+    }
 
     constructor(private TagsService:TagsService,private FormDataService:FormDataService,private spinner: NgxSpinnerService,private _coreTranslationService: CoreTranslationService, private formBuilder: FormBuilder, private OfferService: OfferService) {
         this._coreTranslationService.translate(en, fr, de, pt);
@@ -221,18 +227,14 @@ export class SampleComponent implements OnInit {
             }
         }
         else if(value=='tags'){
-            console.log(this.tags);
-            if(!this.tags){
+            if(this.tags=='0'){
                 this.my_array_isToggle.tags.error='Tags is required!';
             }
             else {
-                if (/^[a-zA-Z& ]{4,50}$/.test(this.tags)) {
-                    this.my_array_isToggle.tags.error='';
-                }
-                else {
-                    this.my_array_isToggle.tags.error='Must be a valid tags!';
-                }
+                this.my_array_isToggle.tags.error = '';
+                console.log(this.tags);
             }
+
         }
         else if(value=='country'){
             if(!this.country){

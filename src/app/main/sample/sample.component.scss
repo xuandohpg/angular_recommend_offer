@@ -1,6 +1,7 @@
 @import '@core/scss/angular/libs/form-wizard.component.scss';
 @import '@core/scss/angular/libs/select.component.scss';
 
+
 .bs-stepper-content .form-control{
   width: 100%;
 }
@@ -414,23 +415,11 @@ input,select{
   border-radius: 6px;
 }
 .list-button{
-  text-align: center;
-  padding-bottom: 10px;
-}
-.notification{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.list-button-notification{
-  display: block;
-  text-align: center;
-  width: 100%;
-}
-.list-button-notification button{
-  margin: 0 10px;
-}
+
+
 .demo-inline-spacing > * {
   margin-top: 0.5rem;
 }
@@ -452,4 +441,18 @@ input,select{
 
 .bs-stepper .bs-stepper-header .step.active .step-trigger .bs-stepper-label .bs-stepper-title {
   color: #7367f0;
+}
+
+.bs-stepper-header{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bs-stepper-header div[role="alert"]{
+  width: 100%;
+}
+
+.bs-stepper  .bs-stepper-header .step{
+  margin-bottom: 0.95rem;
+  margin-top: 1.05rem;
 }
