@@ -1,0 +1,293 @@
+
+<section class="horizontal-wizard">
+    <div id="stepper1" class="bs-stepper horizontal-wizard-example">
+        <ng-container *ngIf="lengthFormData==1">
+            <div class="card-body notification">
+                <h1 class="text-center">Already have the data, do you want to re-enter the information?</h1>
+                <div class="list-button-notification">
+                    <button type="button" class="btn btn-success" (click)="onClickYes()"> Yes </button>
+                    <button type="button" class="btn btn-danger" (click)="onClickNo()"> No </button>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="lengthFormData==0">
+            <ng-container *ngIf="lenghtListOffer<=0">
+                <div class="card-body wp-content message">
+                    <h1 class="text-center m-4">No data</h1>
+                    <div class="list-button">
+                        <button routerLink="/home" class="btn btn-dark">Return Home</button>
+                    </div>
+                    <div class="list-button">
+                        <button (click)="onBackTo()" class="btn btn-dark">Back To</button>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="lenghtListOffer>0 || lenghtListOffer==undefined">
+<!--                <div class="my-5">-->
+<!--                    <div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-primary" data-v-3bcd05f2="">-->
+<!--                        <h4 class="alert-heading">-->
+<!--                            Primary-->
+<!--                        </h4> <div class="alert-body"><span>Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I love cupcake cupcake.</span></div></div>-->
+<!--                </div>-->
+            <div class="bs-stepper-header">
+                <div [ngClass]="{'active':isStatusForm=='general'}" class="step" data-target="#account-details">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-box">1</span>
+                        <span class="bs-stepper-label">
+<!--                        <span class="bs-stepper-title">General</span>-->
+                              <span class="bs-stepper-title">Chung</span>
+                    </span>
+                    </button>
+                </div>
+                <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                <div [ngClass]="{'active':isStatusForm=='offerAndInsightData'}" class="step" data-target="#personal-info">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-box">2</span>
+                        <span class="bs-stepper-label">
+<!--                        <span class="bs-stepper-title">Offer And Insight Data</span>-->
+                             <span class="bs-stepper-title">Offer và đối tượng khách hàng</span>
+                    </span>
+                    </button>
+                </div>
+
+                <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                <div [ngClass]="{'active':isStatusForm=='finish'}" class="step" data-target="#address">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-box">3</span>
+                        <span class="bs-stepper-label">
+<!--                        <span class="bs-stepper-title">Finish</span>-->
+                               <span class="bs-stepper-title">Hoàn thành</span>
+                    </span>
+                    </button>
+                </div>
+            </div>
+            </ng-container>
+
+            <ng-container *ngIf="lenghtListOffer===undefined">
+                <div class="bs-stepper-content" *ngIf="isStatusForm=='general'">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Traffic của bạn chủ yếu từ đâu?</label>
+<!--                                    <label class="form-control-label">Traffic Network</label>-->
+                                    <input name="socialNetwork" [(ngModel)]="trafficNetwork" (click)="clickInput('trafficNetwork')" (keyup)="onKeyTrafficNetwork($event)"  type="text" class="form-control text-lowercase"/>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.trafficNetwork.error && my_array_isToggle.trafficNetwork.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.trafficNetwork.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Kinh nghiệm của bạn</label>
+<!--                                    <label class="form-control-label">Exp Affiliate</label>-->
+                                    <select class="form-control" [(ngModel)]="exp" required (click)="clickInput('exp')"  name="exp">
+                                        <option value="0">-- Choose Exp --</option>
+                                        <option value="1">1 năm</option>
+                                        <option value="2">2 năm</option>
+                                    </select>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.exp.error && my_array_isToggle.exp.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.exp.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+<!--                                    <label class="form-control-label">Scale</label>-->
+                                    <label class="form-control-label">Quy mô hệ thống traffic của bạn</label>
+                                    <select class="form-control" [(ngModel)]="scale" required (click)="clickInput('scale')"   name="scale">
+                                        <option value="0">-- Choose Scale --</option>
+                                        <option value="agency">Agency</option>
+                                        <option value="odd_pub">Odd Pub</option>
+                                    </select>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.scale.error && my_array_isToggle.scale.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.scale.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="d-flex justify-content-between py-2">
+                        <button
+                                [ngClass]="{'visibility-hidden':isStatusForm=='general'}"
+                                class="btn btn-outline-secondary btn-prev"
+                                disabled
+                                rippleEffect
+                        >
+                            <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                            <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                        </button>
+                        <button
+                                (click)="isStatusForm='offerAndInsightData'"
+                                [disabled]="my_array_isToggle.scale.error || my_array_isToggle.exp.error || my_array_isToggle.trafficNetwork.error"
+                                (mouseover)="mouseoverErrorScale()"
+                                type="submit"
+                                class="btn btn-primary btn-next"
+                                rippleEffect
+                        >
+                            <span class="align-middle d-sm-inline-block d-none">Next</span>
+                            <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="bs-stepper-content" *ngIf="isStatusForm=='offerAndInsightData'">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <!--                    <div class="col-sm-6">-->
+                            <!--                        <div class="form-group">-->
+                            <!--                            <label class="form-control-label">Email</label>-->
+                            <!--                            <input name="email" [(ngModel)]="email" (click)="clickInput('email')" (keyup)="onKeyEmail($event)"  (click)="isClick('email')" type="email" class="form-control text-lowercase"/>-->
+                            <!--                            <span class="invalid-form">-->
+                            <!--                            <ng-container *ngIf="my_array_isToggle.email.error && my_array_isToggle.email.error!='error'">-->
+                            <!--                                <small class="form-text text-danger">{{my_array_isToggle.email.error}}</small>-->
+                            <!--                            </ng-container>-->
+                            <!--                            </span>-->
+                            <!--                        </div>-->
+                            <!--                    </div>-->
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <!--                                    <label class="form-control-label">Scale</label>-->
+                                    <label class="form-control-label">Thể loại</label>
+                                    <select class="form-control" [(ngModel)]="tags" required (click)="clickInput('tags')"   name="tags">
+                                        <option value="0">-- Choose Tags --</option>
+                                        <ng-container  *ngFor="let item of listTags['tags-list']">
+                                            <option value="{{item.title}}">{{item.title}}</option>
+                                        </ng-container>
+                                    </select>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.tags.error && my_array_isToggle.tags.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.tags.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+<!--                            <div class="col-sm-6">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="form-control-label">Thể loại Offer</label>-->
+<!--&lt;!&ndash;                                    <label class="form-control-label">Tags</label>&ndash;&gt;-->
+<!--                                    <input name="tags" [(ngModel)]="tags" (click)="clickInput('tags')" (keyup)="onKeyTags($event)"  type="text" class="form-control text-lowercase"/>-->
+<!--                                    <div class="invalid-form">-->
+<!--                                        <ng-container *ngIf="my_array_isToggle.tags.error && my_array_isToggle.tags.error!='error'">-->
+<!--                                            <small class="form-text text-danger">{{my_array_isToggle.tags.error}}</small>-->
+<!--                                        </ng-container>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Giá sản phẩm</label>
+<!--                                    <label class="form-control-label">Price</label>-->
+                                    <input name="price" [(ngModel)]="price" (click)="clickInput('price')" (keyup)="onKeyPrice($event)"  type="text" class="form-control text-lowercase"/>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.price.error && my_array_isToggle.price.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.price.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Quốc gia lưu hành sản phẩm</label>
+<!--                                    <label class="form-control-label">Country</label>-->
+                                    <input name="country" [(ngModel)]="country" (click)="clickInput('country')" (keyup)="onKeyCountry($event)"  type="text" class="form-control text-lowercase"/>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.country.error && my_array_isToggle.country.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.country.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Độ tuổi hướng đến</label>
+<!--                                    <label class="form-control-label">Age</label>-->
+                                    <input name="age" [(ngModel)]="age" (click)="clickInput('age')" (keyup)="onKeyAge($event)" type="text" class="form-control text-lowercase"/>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.age.error && my_array_isToggle.age.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.age.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between py-2">
+                            <button
+                                    (click)="isStatusForm='general'"
+                                    class="btn btn-primary btn-prev"
+                                    rippleEffect
+                            >
+                                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                            </button>
+                            <button
+                                    (click)="handleResult()"
+                                    type="submit"
+                                    [disabled]="my_array_isToggle.tags.error || my_array_isToggle.price.error || my_array_isToggle.country.error || my_array_isToggle.age.error"
+                                    class="btn btn-primary btn-next"
+                                    rippleEffect
+                            >
+                                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </ng-container>
+
+            <div>
+                <div *ngIf="lenghtListOffer>0" class="table-result d-flex justify-content-center py-2">
+                    <div class="list-item">
+                        <ng-container *ngFor="let item of listOffer;let i=index">
+                            <div class="item" [ngClass]="{'top-1':i==0,'top-2':i==1,'top-3':i==2}">
+                                <div class="name-offer text-capitalize">
+                                    <h4>TOP {{i+1}}:</h4>
+                                    <h4>{{ item.name}}</h4>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <img class="image-offer" src="{{item.image}}">
+                                </div>
+                                <div class="info-offer">
+                                    <div>
+                                        <b>Tags: </b> <span>{{item.tags}}</span>
+                                    </div>
+                                    <div><b>Country: </b><span>{{item.country}}</span></div>
+                                    <div><b>Payout: </b><span>{{item.payout}}</span></div>
+                                    <div><b>Conversion Rate: </b><span>{{item.conversion_rate}}</span></div>
+                                    <div><b>Approved Rate: </b><span>{{item.approved_rate}}</span></div>
+                                    <div><b>Price: </b><span>{{item.price}}</span></div>
+                                </div>
+                                <div class="button-view-detail">
+                                    <a href="{{item.link_dinos}}"  class="btn btn-primary btn-sm" rippleEffect>View detail</a>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</section>
+
+<div *ngIf="isLoading" class="loading-spinner">
+    <img class="loading-image" src="https://acegif.com/wp-content/uploads/loading-1.gif">
+</div>
