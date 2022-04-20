@@ -48,16 +48,24 @@ export class SampleComponent implements OnInit {
     public idFormData:number=0;
     public my_array_isToggle:any;
 
+
+    public cr:number;
+    public ar:number;
+    public epc:number;
+    public statusOffer:number=0;
+
+    public quantity:number;
+
     public ratio1:number;
     public ratio2:number;
     public ratio3:number;
 
     public type:string='0';
 
-    public selectedTags:any;
+    public selectedTags:any=[];
     public tags:any;
 
-    public selectedCountry:any;
+    public selectedCountry:any=[];
     public country=[
         { id: 1, name: 'Vietnam' },
         { id: 2, name: 'Thailand' },
@@ -65,14 +73,14 @@ export class SampleComponent implements OnInit {
         { id: 4, name:"Indonesia"},
         { id: 5, name:"United States of America"},
     ];
-    public selectedAge:any;
+    public selectedAge:any=[];
     public age = [
         { id: 1, name: '20 tuổi->35 tuổi' },
         { id: 2, name: '35 tuổi->45 tuổi' },
         { id: 3, name: '40 tuổi->50 tuổi' },
     ];
 
-    public selectedTraffic: any;
+    public selectedTraffic: any=[];
     public traffic = [
         { id: 1, name: 'Facebook' },
         { id: 2, name: 'Google' },
@@ -92,21 +100,21 @@ export class SampleComponent implements OnInit {
         this.ratio3=Math.floor(Math.random() * 21) + 50;
 
         // Math.floor (Math.random () * 31) + 50
-        let data_form={
-            tags: "Male Enhancement",
-            country: "",
-            age: 24,
-            traffic_network: "ekiwi",
-            exp: "1",
-            scale: "agency",
-            price:36
-        };
+        // let data_form={
+        //     tags: "Male Enhancement",
+        //     country: "",
+        //     age: 24,
+        //     traffic_network: "ekiwi",
+        //     exp: "1",
+        //     scale: "agency",
+        //     price:36
+        // };
 
-        this.OfferService.getOffer(data_form).subscribe(data => {
-            this.listOffer = data;
-            this.lenghtListOffer = this.listOffer.length;
-            this.lengthFormData = 0;
-        });
+        // this.OfferService.getOffer(data_form).subscribe(data => {
+        //     this.listOffer = data;
+        //     this.lenghtListOffer = this.listOffer.length;
+        //     this.lengthFormData = 0;
+        // });
     }
 
 
@@ -186,20 +194,6 @@ export class SampleComponent implements OnInit {
             }
         }
     }
-    onKeyPayout(event){
-        if(!this.payout){
-            this.my_array_isToggle.payout.error='Payout is required!';
-        }
-        else {
-            if(!isNaN(this.payout)){
-                this.my_array_isToggle.payout.error='';
-            }
-            else {
-                this.my_array_isToggle.payout.error='Must be a valid payout!';
-            }
-        }
-    }
-
     // ngDoCheck(){
     //     this.mouseoverErrorScale();
     // }
@@ -226,9 +220,174 @@ export class SampleComponent implements OnInit {
         // }
     }
 
+    onKeyQuantity(event){
+        if(!this.quantity){
+            this.my_array_isToggle.quantity.error='Quantity is required!';
+        }
+        else {
+            if(isNaN(this.quantity)){
+                this.my_array_isToggle.quantity.error='Must be a valid quantity!';
+            }
+            else if(!isNaN(this.quantity) && this.quantity>=1){
+                this.my_array_isToggle.quantity.error='';
+            }
+        }
+    }
+        onKeyPayout(event){
+        if(!this.payout){
+            this.my_array_isToggle.payout.error='';
+        }
+        else {
+            if(isNaN(this.payout)){
+            this.my_array_isToggle.payout.error='Must be a valid payout!';
+            }
+            else if(!isNaN(this.payout) && this.payout>0){
+                this.my_array_isToggle.payout.error='';
+            }
+        }
+        console.log(this.my_array_isToggle.payout.error);
+    }
+    onKeyCr(event){
+        if(!this.cr){
+            this.my_array_isToggle.cr.error='';
+        }
+        else {
+            if(isNaN(this.cr)){
+            this.my_array_isToggle.cr.error='Must be a valid cr!';
+            }
+            else if(!isNaN(this.cr) && this.cr>0){
+                this.my_array_isToggle.cr.error='';
+            }
+        }
+    }
+
+    onKeyAr(event){
+    //      console.log('onKeyAr');
+            if(!this.ar){
+                this.my_array_isToggle.ar.error='';
+            }
+            else {
+                if(isNaN(this.ar)){
+                this.my_array_isToggle.ar.error='Must be a valid ar!';
+                }
+                else if(!isNaN(this.ar) && this.ar>0){
+                    this.my_array_isToggle.ar.error='';
+                }
+            }
+    }
     //////////////////////////////////////////////////////// su kien check
     clickInput(value){
-        if(value=='scale'){
+        if(value=="traffic"){
+
+            if(this.selectedTraffic.length<=0){
+                this.my_array_isToggle.traffic.error='Traffic is required!';
+            }
+            else{
+                this.my_array_isToggle.traffic.error='';
+            }
+
+            console.log("traffic-"+this.my_array_isToggle.traffic.error);
+        }
+        else if(value=='exp'){
+            if(this.exp=='0'){
+                this.my_array_isToggle.exp.error='Exp is required!';
+            }
+            else {
+                this.my_array_isToggle.exp.error='';
+            }
+        }
+        else if(value=='quantity'){
+            if(!this.quantity){
+                this.my_array_isToggle.quantity.error='Quantity is required!';
+            }
+            else {
+                if(isNaN(this.quantity)){
+                    this.my_array_isToggle.quantity.error='Must be a valid quantity!';
+                }
+                else if(!isNaN(this.quantity) && this.quantity>=1){
+                    this.my_array_isToggle.quantity.error='';
+                }
+            }
+        }
+        else if(value=='age'){
+            if(this.selectedAge.length<=0){
+                this.my_array_isToggle.age.error='Age is required!';
+            }
+            else{
+                this.my_array_isToggle.age.error='';
+            }
+        }
+        else if(value=='tags'){
+            if(this.selectedTags.length<=0){
+                this.my_array_isToggle.tags.error='Tags is required!';
+            }
+            else {
+                this.my_array_isToggle.tags.error = '';
+            }
+
+        }
+        else if(value=='payout'){
+            if(!this.payout){
+                this.my_array_isToggle.payout.error='';
+            }
+            else {
+                if(isNaN(this.payout)){
+                this.my_array_isToggle.payout.error='Must be a valid payout!';
+                }
+                else if(!isNaN(this.payout) && this.payout>0){
+                    this.my_array_isToggle.payout.error='';
+                }
+            }
+        }
+        else if(value=='country'){
+            if(this.selectedCountry.length<=0){
+                this.my_array_isToggle.country.error='Country is required!';
+            }
+            else {
+                this.my_array_isToggle.country.error='';
+            }
+            console.log(this.my_array_isToggle.country.error);
+        }
+        else if(value=='type'){
+            if(this.type=='0'){
+                this.my_array_isToggle.type.error='Type is required!';
+            }
+            else {
+                this.my_array_isToggle.type.error='';
+            }
+        }
+        else if(value=="cr"){
+            if(!this.cr){
+                this.my_array_isToggle.cr.error='';
+            }
+            else {
+                if(isNaN(this.cr)){
+                this.my_array_isToggle.cr.error='Must be a valid cr!';
+                }
+                else if(!isNaN(this.cr) && this.cr>0){
+                    this.my_array_isToggle.cr.error='';
+                }
+            }
+        }
+        else if(value=="ar"){
+            console.log('click');
+            if(!this.ar){
+                this.my_array_isToggle.ar.error='';
+            }
+            else {
+                if(isNaN(this.ar)){
+                this.my_array_isToggle.ar.error='Must be a valid ar!';
+                }
+                else if(!isNaN(this.ar) && this.ar>0){
+                    this.my_array_isToggle.ar.error='';
+                }
+            }
+        }
+
+
+
+
+        else if(value=='scale'){
             if(this.scale=='0'){
                 this.my_array_isToggle.scale.error='Scale is required!';
             }
@@ -236,19 +395,7 @@ export class SampleComponent implements OnInit {
                 this.my_array_isToggle.scale.error='';
             }
         }
-        else if(value=='payout'){
-            if(!this.payout){
-                this.my_array_isToggle.payout.error='Payout is required!';
-            }
-            else {
-                if(!isNaN(this.payout)){
-                    this.my_array_isToggle.payout.error='';
-                }
-                else {
-                    this.my_array_isToggle.payout.error='Must be a valid payout!';
-                }
-            }
-        }
+
         else if(value=='trafficNetwork'){
             if(!this.trafficNetwork){
                 this.my_array_isToggle.trafficNetwork.error='Traffic Network is required!';
@@ -273,53 +420,6 @@ export class SampleComponent implements OnInit {
                 else {
                     this.my_array_isToggle.email.error='Must be a valid email!';
                 }
-            }
-        }
-        else if(value=='tags'){
-            if(this.tags=='0'){
-                this.my_array_isToggle.tags.error='Tags is required!';
-            }
-            else {
-                this.my_array_isToggle.tags.error = '';
-                console.log(this.tags);
-            }
-
-        }
-        else if(value=='country'){
-            if(!this.country){
-                this.my_array_isToggle.country.error='Country is required!';
-            }
-            // else {
-            //     if (/^[a-zA-Z ]{4,50}$/.test(this.country)) {
-            //         this.my_array_isToggle.country.error='';
-            //     }
-            //     else {
-            //         this.my_array_isToggle.country.error='Must be a valid country!';
-            //     }
-            // }
-        }
-        else if(value=='age'){
-            // if(!this.age){
-            //     this.my_array_isToggle.age.error='Age is required!';
-            // }
-            // else {
-            //     if(this.age>=18 && this.age<=100){
-            //         this.my_array_isToggle.age.error='';
-            //     }
-            //     else {
-            //         this.my_array_isToggle.age.error='Must be a valid age!';
-            //     }
-            // }
-        }
-        else if(value=='exp'){
-            if(this.exp=='0'){
-                this.my_array_isToggle.exp.error='Exp is required!';
-            }
-            else if(this.exp=='1' || this.exp=='2') {
-                this.my_array_isToggle.exp.error='';
-            }
-            else {
-                this.my_array_isToggle.exp.error='Must be a valid exp!';
             }
         }
     }
@@ -468,6 +568,28 @@ export class SampleComponent implements OnInit {
             exp:{
                 error:'error',
             },
+            traffic:{
+                error:'error',
+            },
+            quantity:{
+                error:'error',
+            },
+            type:{
+                error:'error',
+            },
+            cr:{
+                error:'error',
+            },
+            ar:{
+                error:'error',
+            },
+            epc:{
+                error:'error',
+            },
+            statusOffer:{
+                error:'error',
+            }
+
         }
 
         this.contentHeader = {

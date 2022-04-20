@@ -80,10 +80,10 @@
                                 <label class="form-control-label">Traffic của bạn chủ yếu từ đâu?</label>
                                 <div class="form-group">
                                     <ng-select
+                                            (click)="clickInput('traffic')"
                                             [items]="traffic"
                                             bindLabel="name"
-                                            bindValue="id"
-                                            [addTag]="true"
+                                            [addTag]="selectAddTagMethod"
                                             multiple="true"
                                             placeholder="-- Choose Traffic --"
                                             [(ngModel)]="selectedTraffic"
@@ -93,22 +93,30 @@
                                         <span class="ng-value-label"> {{ item.name }}</span>
                                         <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                       </ng-template>
-                                      </ng-select>
+                                    </ng-select>
                                       Selected value: {{ selectedTraffic | json }}
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.traffic.error && my_array_isToggle.traffic.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.traffic.error}}
+                                            </small>
+                                        </ng-container>
+                                    </div>
                                 </div>
                             </div>
+
 
 
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Kinh nghiệm của bạn</label>
 <!--                                    <label class="form-control-label">Exp Affiliate</label>-->
-                                    <select class="form-control" [(ngModel)]="exp" required (click)="clickInput('exp')"  name="exp">
+                                    <select class="form-control" [(ngModel)]="exp" (click)="clickInput('exp')" name="exp">
                                         <option value="0">-- Choose Exp --</option>
                                         <option value="1">Mới bắt đầu</option>
                                         <option value="2">Đã có kinh nghiệm từ 1->2 năm</option>
-                                        <option value="1">Chuyên gia</option>
+                                        <option value="3">Chuyên gia</option>
                                     </select>
+
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.exp.error && my_array_isToggle.exp.error!='error'">
                                             <small class="form-text text-danger">{{my_array_isToggle.exp.error}}</small>
@@ -120,10 +128,10 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Số lượng đơn hàng theo ngày</label>
-                                    <input name="socialNetwork" [(ngModel)]="trafficNetwork" (click)="clickInput('trafficNetwork')" (keyup)="onKeyTrafficNetwork($event)"  type="text" class="form-control text-lowercase"/>
+                                    <input name="quantity" [(ngModel)]="quantity" (click)="clickInput('quantity')" (keyup)="onKeyQuantity($event)"  type="text" class="form-control text-lowercase"/>
                                     <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.trafficNetwork.error && my_array_isToggle.trafficNetwork.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.trafficNetwork.error}}</small>
+                                        <ng-container *ngIf="my_array_isToggle.quantity.error && my_array_isToggle.quantity.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.quantity.error}}</small>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -133,10 +141,10 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Độ tuổi hướng đến</label>
                                     <ng-select
+                                            (click)="clickInput('age')"
                                             [items]="age"
                                             bindLabel="name"
-                                            bindValue="id"
-                                            [addTag]="true"
+                                            [addTag]="selectAddTagMethod"
                                             multiple="true"
                                             placeholder="-- Choose Age --"
                                             [(ngModel)]="selectedAge"
@@ -148,6 +156,12 @@
                                         </ng-template>
                                     </ng-select>
                                     Selected value: {{ selectedAge | json }}
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.age.error && my_array_isToggle.age.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.age.error}}
+                                            </small>
+                                        </ng-container>
+                                    </div>
                                 </div>
                             </div>
   
@@ -173,26 +187,14 @@
                 <div class="bs-stepper-content" *ngIf="isStatusForm=='offerAndInsightData'">
                     <form class="form-horizontal">
                         <div class="row">
-                            <!--                    <div class="col-sm-6">-->
-                            <!--                        <div class="form-group">-->
-                            <!--                            <label class="form-control-label">Email</label>-->
-                            <!--                            <input name="email" [(ngModel)]="email" (click)="clickInput('email')" (keyup)="onKeyEmail($event)"  (click)="isClick('email')" type="email" class="form-control text-lowercase"/>-->
-                            <!--                            <span class="invalid-form">-->
-                            <!--                            <ng-container *ngIf="my_array_isToggle.email.error && my_array_isToggle.email.error!='error'">-->
-                            <!--                                <small class="form-text text-danger">{{my_array_isToggle.email.error}}</small>-->
-                            <!--                            </ng-container>-->
-                            <!--                            </span>-->
-                            <!--                        </div>-->
-                            <!--                    </div>-->
-
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Lĩnh vực</label>
                                     <ng-select
+                                            (click)="clickInput('tags')"
                                             [items]="tags"
                                             bindLabel="title"
-                                            bindValue="id"
-                                            [addTag]="true"
+                                            [addTag]="selectAddTagMethod"
                                             multiple="true"
                                             placeholder="-- Choose Tags --"
                                             [(ngModel)]="selectedTags"
@@ -228,10 +230,10 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Quốc gia lưu hành sản phẩm</label>
                                     <ng-select
+                                            (click)="clickInput('country')"
                                             [items]="country"
                                             bindLabel="name"
-                                            bindValue="id"
-                                            [addTag]="true"
+                                            [addTag]="selectAddTagMethod"
                                             multiple="true"
                                             placeholder="-- Choose Country --"
                                             [(ngModel)]="selectedCountry"
@@ -246,7 +248,8 @@
 
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.country.error && my_array_isToggle.country.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.country.error}}</small>
+                                            <small class="form-text text-danger">{{my_array_isToggle.country.error}}
+                                            </small>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -261,8 +264,8 @@
                                         <option value="3">CPS</option>
                                     </select>
                                     <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.exp.error && my_array_isToggle.exp.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.exp.error}}</small>
+                                        <ng-container *ngIf="my_array_isToggle.type.error && my_array_isToggle.type.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.type.error}}</small>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -275,10 +278,10 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">CR kỳ vọng</label>
-                                                    <input name="payout" [(ngModel)]="payout" (click)="clickInput('payout')" (keyup)="onKeyPayout($event)"  type="text" class="form-control text-lowercase"/>
+                                                    <input name="cr" [(ngModel)]="cr" (click)="clickInput('cr')" (keyup)="onKeyCr($event)"  type="text" class="form-control text-lowercase"/>
                                                     <div class="invalid-form">
-                                                        <ng-container *ngIf="my_array_isToggle.payout.error && my_array_isToggle.payout.error!='error'">
-                                                            <small class="form-text text-danger">{{my_array_isToggle.payout.error}}</small>
+                                                        <ng-container *ngIf="my_array_isToggle.cr.error && my_array_isToggle.cr.error!='error'">
+                                                            <small class="form-text text-danger">{{my_array_isToggle.cr.error}}</small>
                                                         </ng-container>
                                                     </div>
                                                 </div>
@@ -286,10 +289,11 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">AR kỳ vọng</label>
-                                                    <input name="payout" [(ngModel)]="payout" (click)="clickInput('payout')" (keyup)="onKeyPayout($event)"  type="text" class="form-control text-lowercase"/>
+                                                    <input name="ar" [(ngModel)]="ar" (click)="clickInput('ar')" (keyup)="onKeyAr($event)"  type="text" class="form-control text-lowercase"/>
                                                     <div class="invalid-form">
-                                                        <ng-container *ngIf="my_array_isToggle.payout.error && my_array_isToggle.payout.error!='error'">
-                                                            <small class="form-text text-danger">{{my_array_isToggle.payout.error}}</small>
+                                                        <ng-container *ngIf="my_array_isToggle.ar.error && my_array_isToggle.ar.error!='error'">
+                                                            <small class="form-text text-danger">{{my_array_isToggle.ar.error}}
+                                                            </small>
                                                         </ng-container>
                                                     </div>
                                                 </div>
@@ -360,7 +364,6 @@
                 <div class="table-result d-flex justify-content-center py-2">
                     <div class="list-item">
                         <ng-container *ngFor="let item of listOffer;let i=index">
-
                                 <div class="item" [ngClass]="{'top-1':i==0,'top-2':i==1,'top-3':i==2}">
                                     <div class="content-item">
                                         <div class="name-offer text-capitalize">
