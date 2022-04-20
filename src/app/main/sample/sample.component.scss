@@ -1,6 +1,4 @@
 
-
-
 .bs-stepper-content .form-control{
   width: 100%;
 }
@@ -244,25 +242,11 @@ a.btn-continue[disabled]{
   margin:0 10px;
 }
 .table-result .list-item .item .name-offer{
-  min-height: 45px;
-}
-.name-offer{
-  display: flex;
-}
-.top-1 .name-offer h4:first-child{
-  flex: 0 0 60px;
-}
-.top-2 .name-offer h4:first-child{
-  flex: 0 0 56px;
-}
-.top-3 .name-offer h4:first-child{
-  flex: 0 0 53px;
-}
-.name-offer h4:first-child{
-  flex: 0 0 56px;
+
+  text-align: center;
 }
 .name-offer h4{
-  display: inline-block;
+
 }
 
 #spinner-loading #image-loading{
@@ -356,10 +340,11 @@ input,select{
   font-size: 16px;
 }
 .list-item .name-offer h4{
-  padding-top: 8px;
+  padding: 4px 0 0 0;
+  margin: 0;
   color: #00cfc8;
   font-weight: 600;
-  min-height: 55px;
+  min-height: 48px;
 }
 .name-offer h4{
   font-size: 16px;
@@ -405,8 +390,11 @@ input,select{
 }
 
 .item {
+  position: relative;
   border: 2px solid #0e4b97;
   border-radius: 6px;
+}
+.content-item{
   padding: 10px 15px;
 }
 .image-offer{
@@ -454,4 +442,67 @@ input,select{
 .bs-stepper  .bs-stepper-header .step{
   margin-bottom: 0.95rem;
   margin-top: 1.05rem;
+}
+
+.more-information{
+  padding: 15px 0 25px 0;
+}
+
+.box-parents{
+  position: absolute;
+  right: 0;
+  top:20px;
+  display: flex;
+  font-size: 7px;
+}
+
+.box-child{
+  width: 10px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ef26d6;
+  border: 1px solid #704151;
+}
+.ratio{
+  display: inline-block;
+  width: 35px;
+  height: 16px;
+  background-color: #1a53f3;
+  color: #fff;
+  //border: 1px solid #d60047;
+  font-size: 11px;
+  border-radius: 2px;
+  text-align: center;
+  vertical-align: middle;
+}
+.list-button-offer{
+  margin-top: 15px;
+  background-color: #7367f0 ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border-radius: 0.358rem;
+}
+.button-offer{
+  width: 50%;
+  box-sizing: border-box;
+  text-align: center;
+  display: inline-block;
+  padding: 4.02px 0;
+  cursor: pointer;
+}
+.button-offer a{
+  line-height: 1;
+  font-weight: 500;
+  height: 100%;
+  background-color: #7367f0;
+  color: #fff ;
+}
+.list-button-offer .button-offer:first-child{
+  border-right: 1px solid #fff;
+}
+.list-button-offer .button-offer:last-child{
+  border-left: 1px solid #fff;
 }

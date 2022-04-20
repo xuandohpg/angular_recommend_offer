@@ -33,12 +33,11 @@ export class SampleComponent implements OnInit {
     public isLoading:boolean=false;
     public isStatusForm:string='general';
     public scale:string='0';
-    public price:number;
+    public payout:number;
     public trafficNetwork:string;
     public email:string;
-    public tags:string='0';
-    public country:string;
-    public age:number;
+    // public tags:string='0';
+    // public country:string;
     public socialNetwork:string;
     public exp:string='0';
     public confirm:string;
@@ -49,15 +48,36 @@ export class SampleComponent implements OnInit {
     public idFormData:number=0;
     public my_array_isToggle:any;
 
+    public ratio1:number;
+    public ratio2:number;
+    public ratio3:number;
 
+    public type:string='0';
 
-      selectedCar: any;
+    public selectedTags:any;
+    public tags:any;
 
-      cars = [
-          { id: 1, name: 'Facebook' },
-          { id: 2, name: 'Google' },
-          { id: 3, name: 'Tiktok' },
-      ];
+    public selectedCountry:any;
+    public country=[
+        { id: 1, name: 'Vietnam' },
+        { id: 2, name: 'Thailand' },
+        { id: 3, name: 'Bahamas' },
+        { id: 4, name:"Indonesia"},
+        { id: 5, name:"United States of America"},
+    ];
+    public selectedAge:any;
+    public age = [
+        { id: 1, name: '20 tuổi->35 tuổi' },
+        { id: 2, name: '35 tuổi->45 tuổi' },
+        { id: 3, name: '40 tuổi->50 tuổi' },
+    ];
+
+    public selectedTraffic: any;
+    public traffic = [
+        { id: 1, name: 'Facebook' },
+        { id: 2, name: 'Google' },
+        { id: 3, name: 'Tiktok' },
+    ];
 
     selectAddTagMethod(name) {
         return { name: name, tag: true };
@@ -65,8 +85,29 @@ export class SampleComponent implements OnInit {
 
     constructor(private TagsService:TagsService,private FormDataService:FormDataService,private spinner: NgxSpinnerService,private _coreTranslationService: CoreTranslationService, private formBuilder: FormBuilder, private OfferService: OfferService) {
         this._coreTranslationService.translate(en, fr, de, pt);
-    }
+        this.tags=this.TagsService.getListTags().info["tags-list"];
 
+        this.ratio1=Math.floor(Math.random() * 21) + 80;
+        this.ratio2=Math.floor(Math.random() * 11) + 70;
+        this.ratio3=Math.floor(Math.random() * 21) + 50;
+
+        // Math.floor (Math.random () * 31) + 50
+        let data_form={
+            tags: "Male Enhancement",
+            country: "",
+            age: 24,
+            traffic_network: "ekiwi",
+            exp: "1",
+            scale: "agency",
+            price:36
+        };
+
+        this.OfferService.getOffer(data_form).subscribe(data => {
+            this.listOffer = data;
+            this.lenghtListOffer = this.listOffer.length;
+            this.lengthFormData = 0;
+        });
+    }
 
 
     /////////////////////////////////////////////////////////////////// su kien keyup
@@ -105,29 +146,29 @@ export class SampleComponent implements OnInit {
         if(!this.country){
             this.my_array_isToggle.country.error='Country is required!';
         }
-        else {
-            if (/^[a-zA-Z ]{4,50}$/.test(this.country)) {
-                this.my_array_isToggle.country.error='';
-            }
-            else {
-                this.my_array_isToggle.country.error='Must be a valid country!';
-            }
-        }
+        // else {
+        //     if (/^[a-zA-Z ]{4,50}$/.test(this.country)) {
+        //         this.my_array_isToggle.country.error='';
+        //     }
+        //     else {
+        //         this.my_array_isToggle.country.error='Must be a valid country!';
+        //     }
+        // }
     }
 
     onKeyAge(event){
-        this.age=event.target.value;
-        if(!this.age){
-            this.my_array_isToggle.age.error='Age is required!';
-        }
-        else {
-            if(this.age>=18 && this.age<=100){
-                this.my_array_isToggle.age.error='';
-            }
-            else {
-                this.my_array_isToggle.age.error='Must be a valid age!';
-            }
-        }
+        // this.age=event.target.value;
+        // if(!this.age){
+        //     this.my_array_isToggle.age.error='Age is required!';
+        // }
+        // else {
+        //     if(this.age>=18 && this.age<=100){
+        //         this.my_array_isToggle.age.error='';
+        //     }
+        //     else {
+        //         this.my_array_isToggle.age.error='Must be a valid age!';
+        //     }
+        // }
     }
 
 
@@ -145,16 +186,16 @@ export class SampleComponent implements OnInit {
             }
         }
     }
-    onKeyPrice(event){
-        if(!this.price){
-            this.my_array_isToggle.price.error='Price is required!';
+    onKeyPayout(event){
+        if(!this.payout){
+            this.my_array_isToggle.payout.error='Payout is required!';
         }
         else {
-            if(!isNaN(this.price)){
-                this.my_array_isToggle.price.error='';
+            if(!isNaN(this.payout)){
+                this.my_array_isToggle.payout.error='';
             }
             else {
-                this.my_array_isToggle.price.error='Must be a valid price!';
+                this.my_array_isToggle.payout.error='Must be a valid payout!';
             }
         }
     }
@@ -164,25 +205,25 @@ export class SampleComponent implements OnInit {
     // }
 
     mouseoverErrorScale(){
-        if(this.exp=='0'){
-            this.my_array_isToggle.exp.error='Exp is required!';
-        }
-        else if(this.exp=='1' || this.exp=='2') {
-            this.my_array_isToggle.exp.error='';
-        }
-        else {
-            this.my_array_isToggle.exp.error='Must be a valid exp!';
-        }
-
-        if(this.scale=='0'){
-            this.my_array_isToggle.scale.error='Scale is required!';
-        }
-        else if(this.scale=='odd_pub' || this.scale=='agency') {
-            this.my_array_isToggle.scale.error='';
-        }
-        else {
-            this.my_array_isToggle.scale.error='Must be a valid scale!';
-        }
+        // if(this.exp=='0'){
+        //     this.my_array_isToggle.exp.error='Exp is required!';
+        // }
+        // else if(this.exp=='1' || this.exp=='2') {
+        //     this.my_array_isToggle.exp.error='';
+        // }
+        // else {
+        //     this.my_array_isToggle.exp.error='Must be a valid exp!';
+        // }
+        //
+        // if(this.scale=='0'){
+        //     this.my_array_isToggle.scale.error='Scale is required!';
+        // }
+        // else if(this.scale=='odd_pub' || this.scale=='agency') {
+        //     this.my_array_isToggle.scale.error='';
+        // }
+        // else {
+        //     this.my_array_isToggle.scale.error='Must be a valid scale!';
+        // }
     }
 
     //////////////////////////////////////////////////////// su kien check
@@ -195,16 +236,16 @@ export class SampleComponent implements OnInit {
                 this.my_array_isToggle.scale.error='';
             }
         }
-        else if(value=='price'){
-            if(!this.price){
-                this.my_array_isToggle.price.error='Price is required!';
+        else if(value=='payout'){
+            if(!this.payout){
+                this.my_array_isToggle.payout.error='Payout is required!';
             }
             else {
-                if(!isNaN(this.price)){
-                    this.my_array_isToggle.price.error='';
+                if(!isNaN(this.payout)){
+                    this.my_array_isToggle.payout.error='';
                 }
                 else {
-                    this.my_array_isToggle.price.error='Must be a valid price!';
+                    this.my_array_isToggle.payout.error='Must be a valid payout!';
                 }
             }
         }
@@ -248,27 +289,27 @@ export class SampleComponent implements OnInit {
             if(!this.country){
                 this.my_array_isToggle.country.error='Country is required!';
             }
-            else {
-                if (/^[a-zA-Z ]{4,50}$/.test(this.country)) {
-                    this.my_array_isToggle.country.error='';
-                }
-                else {
-                    this.my_array_isToggle.country.error='Must be a valid country!';
-                }
-            }
+            // else {
+            //     if (/^[a-zA-Z ]{4,50}$/.test(this.country)) {
+            //         this.my_array_isToggle.country.error='';
+            //     }
+            //     else {
+            //         this.my_array_isToggle.country.error='Must be a valid country!';
+            //     }
+            // }
         }
         else if(value=='age'){
-            if(!this.age){
-                this.my_array_isToggle.age.error='Age is required!';
-            }
-            else {
-                if(this.age>=18 && this.age<=100){
-                    this.my_array_isToggle.age.error='';
-                }
-                else {
-                    this.my_array_isToggle.age.error='Must be a valid age!';
-                }
-            }
+            // if(!this.age){
+            //     this.my_array_isToggle.age.error='Age is required!';
+            // }
+            // else {
+            //     if(this.age>=18 && this.age<=100){
+            //         this.my_array_isToggle.age.error='';
+            //     }
+            //     else {
+            //         this.my_array_isToggle.age.error='Must be a valid age!';
+            //     }
+            // }
         }
         else if(value=='exp'){
             if(this.exp=='0'){
@@ -292,12 +333,12 @@ export class SampleComponent implements OnInit {
                 this.isLoading=false;
                     let data_form={
                         tags: this.tags,
-                        country: this.country.toLowerCase(),
+                        // country: this.country.toLowerCase(),
                         age : this.age,
                         traffic_network : this.trafficNetwork.toLowerCase(),
                         exp : this.exp,
                         scale : this.scale,
-                        price : this.price
+                        payout : this.payout
                     };
                     // console.log(data_form);
                 this.OfferService.getOffer(data_form).subscribe(data => {
@@ -314,12 +355,12 @@ export class SampleComponent implements OnInit {
                         let data_form={
                             email:"xuando199888@gmail.com",
                             tags: this.tags,
-                            country: this.country.toLowerCase(),
+                            // country: this.country.toLowerCase(),
                             age : this.age,
                             traffic_network : this.trafficNetwork.toLowerCase(),
                             exp : this.exp,
                             scale : this.scale,
-                            price : this.price
+                            payout : this.payout
                         };
                         // this.FormDataService.createFormData(data_form).subscribe(data=>{});
                     }
@@ -345,10 +386,10 @@ export class SampleComponent implements OnInit {
                     traffic_network: data.traffic_network,
                     exp: data.exp,
                     scale:data.scale,
-                    price:data.price,
+                    payout:data.payout,
                 };
+
                 this.OfferService.getOffer(data_form).subscribe(data => {
-                    console.log(data);
                     this.listOffer = data;
                     this.lenghtListOffer = this.listOffer.length;
                     this.lengthFormData = 0;
@@ -373,7 +414,7 @@ export class SampleComponent implements OnInit {
             this.age=data.age;
             this.trafficNetwork=data.traffic_network;
             this.exp=data.exp;
-            this.price=data.price;
+            this.payout=data.payout;
             this.scale=data.scale;
         });
     }
@@ -402,7 +443,7 @@ export class SampleComponent implements OnInit {
         }, 6000);
 
         this.my_array_isToggle={
-            price:{
+            payout:{
                 error:'error',
             },
             scale:{

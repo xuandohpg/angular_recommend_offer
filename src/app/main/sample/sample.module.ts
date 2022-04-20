@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 const routes = [
   {
@@ -31,7 +31,7 @@ const routes = [
 
 @NgModule({
   declarations: [SampleComponent, HomeComponent],
-  imports: [NgSelectModule,FormsModule,BrowserAnimationsModule,NgxSpinnerModule,RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule],
+  imports: [TooltipModule,NgSelectModule,FormsModule,BrowserAnimationsModule,NgxSpinnerModule,RouterModule.forChild(routes), ContentHeaderModule, TranslateModule, CoreCommonModule],
   exports: [SampleComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

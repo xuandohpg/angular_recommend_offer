@@ -77,26 +77,25 @@
                         <div class="row">
 
                             <div class="col-sm-6">
-                                 <label class="form-control-label">Traffic của bạn chủ yếu từ đâu?</label>
-                                    <div class="form-group">
-                                      <ng-select
-                                        [items]="cars"
-                                        bindLabel="name" 
-                                        bindValue="id" 
-                                        [addTag]="true"
-                                        multiple="true"
-                                        placeholder="selected Car"
-                                        [(ngModel)]="selectedCar"
-                                        [ngModelOptions]="{standalone: true}"
+                                <label class="form-control-label">Traffic của bạn chủ yếu từ đâu?</label>
+                                <div class="form-group">
+                                    <ng-select
+                                            [items]="traffic"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [addTag]="true"
+                                            multiple="true"
+                                            placeholder="-- Choose Traffic --"
+                                            [(ngModel)]="selectedTraffic"
+                                            [ngModelOptions]="{standalone: true}"
                                       >
-
                                       <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                         <span class="ng-value-label"> {{ item.name }}</span>
                                         <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                       </ng-template>
                                       </ng-select>
-                                      Selected value: {{ selectedCar | json }}
-                                    </div>
+                                      Selected value: {{ selectedTraffic | json }}
+                                </div>
                             </div>
 
 
@@ -121,7 +120,6 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Số lượng đơn hàng theo ngày</label>
-<!--                                    <label class="form-control-label">Traffic Network</label>-->
                                     <input name="socialNetwork" [(ngModel)]="trafficNetwork" (click)="clickInput('trafficNetwork')" (keyup)="onKeyTrafficNetwork($event)"  type="text" class="form-control text-lowercase"/>
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.trafficNetwork.error && my_array_isToggle.trafficNetwork.error!='error'">
@@ -134,24 +132,33 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Độ tuổi hướng đến</label>
-<!--                                    <label class="form-control-label">Age</label>-->
-                                    <input name="age" [(ngModel)]="age" (click)="clickInput('age')" (keyup)="onKeyAge($event)" type="text" class="form-control text-lowercase"/>
-                                    <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.age.error && my_array_isToggle.age.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.age.error}}</small>
-                                        </ng-container>
-                                    </div>
+                                    <ng-select
+                                            [items]="age"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [addTag]="true"
+                                            multiple="true"
+                                            placeholder="-- Choose Age --"
+                                            [(ngModel)]="selectedAge"
+                                            [ngModelOptions]="{standalone: true}"
+                                    >
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label"> {{ item.name }}</span>
+                                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                        </ng-template>
+                                    </ng-select>
+                                    Selected value: {{ selectedAge | json }}
                                 </div>
                             </div>
   
                         </div>
                     </form>
 
+<!--                    [disabled]="my_array_isToggle.scale.error || my_array_isToggle.exp.error || my_array_isToggle.trafficNetwork.error"-->
                     <div class="list-button">
                         <button class="visibility-hidden"></button>
                         <button
                                 (click)="isStatusForm='offerAndInsightData'"
-                                [disabled]="my_array_isToggle.scale.error || my_array_isToggle.exp.error || my_array_isToggle.trafficNetwork.error"
                                 (mouseover)="mouseoverErrorScale()"
                                 type="submit"
                                 class="btn btn-primary btn-next"
@@ -180,14 +187,23 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <!--                                    <label class="form-control-label">Scale</label>-->
-                                    <label class="form-control-label">Thể loại</label>
-                                    <select class="form-control" [(ngModel)]="tags" required (click)="clickInput('tags')"   name="tags">
-                                        <option value="0">-- Choose Tags --</option>
-                                        <ng-container  *ngFor="let item of listTags['tags-list']">
-                                            <option value="{{item.title}}">{{item.title}}</option>
-                                        </ng-container>
-                                    </select>
+                                    <label class="form-control-label">Lĩnh vực</label>
+                                    <ng-select
+                                            [items]="tags"
+                                            bindLabel="title"
+                                            bindValue="id"
+                                            [addTag]="true"
+                                            multiple="true"
+                                            placeholder="-- Choose Tags --"
+                                            [(ngModel)]="selectedTags"
+                                            [ngModelOptions]="{standalone: true}"
+                                    >
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label"> {{ item.title }}</span>
+                                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                        </ng-template>
+                                    </ng-select>
+                                    Selected value: {{ selectedTags | json }}
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.tags.error && my_array_isToggle.tags.error!='error'">
                                             <small class="form-text text-danger">{{my_array_isToggle.tags.error}}</small>
@@ -198,12 +214,11 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Giá sản phẩm</label>
-<!--                                    <label class="form-control-label">Price</label>-->
-                                    <input name="price" [(ngModel)]="price" (click)="clickInput('price')" (keyup)="onKeyPrice($event)"  type="text" class="form-control text-lowercase"/>
+                                    <label class="form-control-label">Hoa hồng</label>
+                                    <input name="payout" [(ngModel)]="payout" (click)="clickInput('payout')" (keyup)="onKeyPayout($event)"  type="text" class="form-control text-lowercase"/>
                                     <div class="invalid-form">
-                                        <ng-container *ngIf="my_array_isToggle.price.error && my_array_isToggle.price.error!='error'">
-                                            <small class="form-text text-danger">{{my_array_isToggle.price.error}}</small>
+                                        <ng-container *ngIf="my_array_isToggle.payout.error && my_array_isToggle.payout.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.payout.error}}</small>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -212,12 +227,104 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Quốc gia lưu hành sản phẩm</label>
-<!--                                    <label class="form-control-label">Country</label>-->
-                                    <input name="country" [(ngModel)]="country" (click)="clickInput('country')" (keyup)="onKeyCountry($event)"  type="text" class="form-control text-lowercase"/>
+                                    <ng-select
+                                            [items]="country"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [addTag]="true"
+                                            multiple="true"
+                                            placeholder="-- Choose Country --"
+                                            [(ngModel)]="selectedCountry"
+                                            [ngModelOptions]="{standalone: true}"
+                                    >
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label"> {{ item.name }}</span>
+                                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                        </ng-template>
+                                    </ng-select>
+                                    Selected value: {{ selectedCountry | json }}
+
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.country.error && my_array_isToggle.country.error!='error'">
                                             <small class="form-text text-danger">{{my_array_isToggle.country.error}}</small>
                                         </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Type</label>
+                                    <select class="form-control" [(ngModel)]="type" required (click)="clickInput('type')"  name="type">
+                                        <option value="0">-- Choose Type --</option>
+                                        <option value="1">CPA</option>
+                                        <option value="2">CPL</option>
+                                        <option value="3">CPS</option>
+                                    </select>
+                                    <div class="invalid-form">
+                                        <ng-container *ngIf="my_array_isToggle.exp.error && my_array_isToggle.exp.error!='error'">
+                                            <small class="form-text text-danger">{{my_array_isToggle.exp.error}}</small>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="more-information">
+                                    <button class="btn btn-primary" rippleEffect>Thông tin thêm</button>
+                                    <div class="form-more-information">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">CR kỳ vọng</label>
+                                                    <input name="payout" [(ngModel)]="payout" (click)="clickInput('payout')" (keyup)="onKeyPayout($event)"  type="text" class="form-control text-lowercase"/>
+                                                    <div class="invalid-form">
+                                                        <ng-container *ngIf="my_array_isToggle.payout.error && my_array_isToggle.payout.error!='error'">
+                                                            <small class="form-text text-danger">{{my_array_isToggle.payout.error}}</small>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">AR kỳ vọng</label>
+                                                    <input name="payout" [(ngModel)]="payout" (click)="clickInput('payout')" (keyup)="onKeyPayout($event)"  type="text" class="form-control text-lowercase"/>
+                                                    <div class="invalid-form">
+                                                        <ng-container *ngIf="my_array_isToggle.payout.error && my_array_isToggle.payout.error!='error'">
+                                                            <small class="form-text text-danger">{{my_array_isToggle.payout.error}}</small>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">EPC kỳ vọng</label>
+                                                    <input name="payout" [(ngModel)]="payout" (click)="clickInput('payout')" (keyup)="onKeyPayout($event)"  type="text" class="form-control text-lowercase"/>
+                                                    <div class="invalid-form">
+                                                        <ng-container *ngIf="my_array_isToggle.payout.error && my_array_isToggle.payout.error!='error'">
+                                                            <small class="form-text text-danger">{{my_array_isToggle.payout.error}}</small>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Offer</label>
+
+                                                    <select class="form-control" [(ngModel)]="exp" required (click)="clickInput('exp')"  name="exp">
+                                                        <option value="0">-- Choose Offer --</option>
+                                                        <option value="1">Offer hot</option>
+                                                        <option value="2">Offer tiềm năng</option>
+                                                    </select>
+                                                    <div class="invalid-form">
+                                                        <ng-container *ngIf="my_array_isToggle.exp.error && my_array_isToggle.exp.error!='error'">
+                                                            <small class="form-text text-danger">{{my_array_isToggle.exp.error}}</small>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +343,7 @@
                             <button
                                     (click)="handleResult()"
                                     type="submit"
-                                    [disabled]="my_array_isToggle.tags.error || my_array_isToggle.price.error || my_array_isToggle.country.error || my_array_isToggle.age.error"
+                                    [disabled]="my_array_isToggle.tags.error || my_array_isToggle.payout.error || my_array_isToggle.country.error || my_array_isToggle.age.error"
                                     class="btn btn-primary btn-next"
                                     rippleEffect
                             >
@@ -244,37 +351,58 @@
                                 <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
                             </button>
                         </div>
-
                     </form>
                 </div>
             </ng-container>
 
+<!--            *ngIf="lenghtListOffer>0"-->
             <div>
-                <div *ngIf="lenghtListOffer>0" class="table-result d-flex justify-content-center py-2">
+                <div class="table-result d-flex justify-content-center py-2">
                     <div class="list-item">
                         <ng-container *ngFor="let item of listOffer;let i=index">
-                            <div class="item" [ngClass]="{'top-1':i==0,'top-2':i==1,'top-3':i==2}">
-                                <div class="name-offer text-capitalize">
-                                    <h4>TOP {{i+1}}:</h4>
-                                    <h4>{{ item.name}}</h4>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <img class="image-offer" src="{{item.image}}">
-                                </div>
-                                <div class="info-offer">
-                                    <div>
-                                        <b>Tags: </b> <span>{{item.tags}}</span>
+
+                                <div class="item" [ngClass]="{'top-1':i==0,'top-2':i==1,'top-3':i==2}">
+                                    <div class="content-item">
+                                        <div class="name-offer text-capitalize">
+                                            <h4>{{ item.name}}</h4>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <img class="image-offer" src="{{item.image}}">
+                                        </div>
+                                        <div class="info-offer">
+                                            <div><b>Tỷ lệ phù hợp với bạn: </b><span class="ratio">
+                                            <ng-container *ngIf="i==0">
+                                                {{ratio1}}%
+                                            </ng-container>
+
+                                            <ng-container *ngIf="i==1">
+                                                {{ratio2}}%
+                                            </ng-container>
+
+                                            <ng-container *ngIf="i==2">
+                                                {{ratio3}}%
+                                            </ng-container>
+                                        </span></div>
+                                            <div><b>Tags: </b> <span>{{item.tags}}</span></div>
+                                            <div><b>Country: </b><span>{{item.country}}</span></div>
+                                            <div><b>Payout: </b><span>{{item.payout}}</span></div>
+                                            <div><b>Conversion Rate: </b><span>{{item.conversion_rate}}</span></div>
+                                            <div><b>Approved Rate: </b><span>{{item.approved_rate}}</span></div>
+                                            <div><b>Price: </b><span>{{item.price}}</span></div>
+                                        </div>
+                                        <div class="button-view-detail">
+                                            <a href="{{item.link_dinos}}"  class="btn btn-primary btn-sm" rippleEffect>View detail</a>
+                                        </div>
                                     </div>
-                                    <div><b>Country: </b><span>{{item.country}}</span></div>
-                                    <div><b>Payout: </b><span>{{item.payout}}</span></div>
-                                    <div><b>Conversion Rate: </b><span>{{item.conversion_rate}}</span></div>
-                                    <div><b>Approved Rate: </b><span>{{item.approved_rate}}</span></div>
-                                    <div><b>Price: </b><span>{{item.price}}</span></div>
+                                    <div class="list-button-offer">
+                                        <div  class="button-offer">
+                                            <a href="https://dinos.vn/lien-he-am-dinos/" > Contact AM</a>
+                                        </div>
+                                        <div  class="button-offer">
+                                            <a href="" >Tài liệu</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="button-view-detail">
-                                    <a href="{{item.link_dinos}}"  class="btn btn-primary btn-sm" rippleEffect>View detail</a>
-                                </div>
-                            </div>
                         </ng-container>
                     </div>
                 </div>
