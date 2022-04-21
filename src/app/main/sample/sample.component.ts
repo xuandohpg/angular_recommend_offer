@@ -48,6 +48,7 @@ export class SampleComponent implements OnInit {
     public idFormData:number=0;
     public my_array_isToggle:any;
 
+    public isMoreInformation:boolean=false;
 
     public cr:number;
     public ar:number;
@@ -75,9 +76,9 @@ export class SampleComponent implements OnInit {
     ];
     public selectedAge:any=[];
     public age = [
-        { id: 1, name: '20 tuổi->35 tuổi' },
-        { id: 2, name: '35 tuổi->45 tuổi' },
-        { id: 3, name: '40 tuổi->50 tuổi' },
+        { id: 1, name: '20 tuổi->35 tuổi',value:[20,35] },
+        { id: 2, name: '35 tuổi->45 tuổi',value:[35,45] },
+        { id: 3, name: '45 tuổi->60 tuổi+',value:[45,60] },
     ];
 
     public selectedTraffic: any=[];
@@ -93,7 +94,34 @@ export class SampleComponent implements OnInit {
 
     constructor(private TagsService:TagsService,private FormDataService:FormDataService,private spinner: NgxSpinnerService,private _coreTranslationService: CoreTranslationService, private formBuilder: FormBuilder, private OfferService: OfferService) {
         this._coreTranslationService.translate(en, fr, de, pt);
-        this.tags=this.TagsService.getListTags().info["tags-list"];
+        // this.tags=this.TagsService.getListTags().info["tags-list"];
+        this.tags=[
+            {
+                "id": 45,
+                "title": "Health Product",
+                "sort": 0
+            },
+            {
+                "id": 48,
+                "title": "Male Enhancement",
+                "sort": 0
+            },
+            {
+                "id": 49,
+                "title": "Health & Beauty",
+                "sort": 0
+            },
+            {
+                "id": 50,
+                "title": "Diet & Weightloss",
+                "sort": 0
+            },
+            {
+                "id": 51,
+                "title": "Finance",
+                "sort": 0
+            },
+        ];
 
         this.ratio1=Math.floor(Math.random() * 21) + 80;
         this.ratio2=Math.floor(Math.random() * 11) + 70;
@@ -262,7 +290,6 @@ export class SampleComponent implements OnInit {
     }
 
     onKeyAr(event){
-    //      console.log('onKeyAr');
             if(!this.ar){
                 this.my_array_isToggle.ar.error='';
             }
@@ -274,6 +301,19 @@ export class SampleComponent implements OnInit {
                     this.my_array_isToggle.ar.error='';
                 }
             }
+    }
+    onKeyEpc(event){
+        if(!this.epc){
+            this.my_array_isToggle.epc.error='';
+        }
+        else {
+            if(isNaN(this.epc)){
+                this.my_array_isToggle.epc.error='Must be a valid epc!';
+            }
+            else if(!isNaN(this.epc) && this.epc>0){
+                this.my_array_isToggle.epc.error='';
+            }
+        }
     }
     //////////////////////////////////////////////////////// su kien check
     clickInput(value){
@@ -383,6 +423,19 @@ export class SampleComponent implements OnInit {
                 }
             }
         }
+        else if(value=='epc'){
+            if(!this.epc){
+                this.my_array_isToggle.epc.error='';
+            }
+            else {
+                if(isNaN(this.epc)){
+                    this.my_array_isToggle.epc.error='Must be a valid epc!';
+                }
+                else if(!isNaN(this.epc) && this.epc>0){
+                    this.my_array_isToggle.epc.error='';
+                }
+            }
+        }
 
 
 
@@ -425,6 +478,27 @@ export class SampleComponent implements OnInit {
     }
 
     /////////////////////////////////////////////////////////////////////// xu ly
+    handleResult1(){
+        console.log('ok');
+        console.log('select traffic');
+        console.log(this.selectedTraffic);
+        console.log('exp-'+this.exp);
+        console.log('quantity-'+this.quantity);
+        console.log('age');
+        console.log(this.selectedAge);
+        console.log('linh vuc');
+        console.log(this.selectedTags);
+
+        console.log('hoa hong-'+this.payout);
+        console.log('country');
+        console.log(this.selectedCountry);
+        console.log('type-'+this.type);
+        console.log('ar-'+this.ar);
+        console.log('cr-'+this.cr);
+        console.log('epc-'+this.epc);
+        console.log('status offer-'+this.statusOffer);
+
+    }
     handleResult(){
         let scale:any;
             this.isLoading=true;
