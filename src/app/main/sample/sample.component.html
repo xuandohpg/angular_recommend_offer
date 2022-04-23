@@ -3,7 +3,7 @@
 <section class="horizontal-wizard">
     <div id="stepper1" class="bs-stepper horizontal-wizard-example">
         <ng-container *ngIf="lengthFormData==1">
-            <div class="card-body notification">
+            <div class="notification">
                 <h1 class="text-center">Already have the data, do you want to re-enter the information?</h1>
                 <div class="list-button-notification">
                     <button type="button" class="btn btn-success" (click)="onClickYes()"> Yes </button>
@@ -15,7 +15,7 @@
         <ng-container *ngIf="lengthFormData==0">
             <ng-container *ngIf="lenghtListOffer<=0">
                 <div class="card-body wp-content message">
-                    <h1 class="text-center m-4">No data</h1>
+                    <h1 class="text-center m-4">Không có dữ liệu phù hợp</h1>
                     <div class="list-button">
                         <button routerLink="/home" class="btn btn-dark">Return Home</button>
                     </div>
@@ -95,7 +95,6 @@
                                         <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                       </ng-template>
                                     </ng-select>
-                                      Selected value traffic: {{ selectedTraffic | json }}
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.traffic.error && my_array_isToggle.traffic.error!='error'">
                                             <small class="form-text text-danger">{{my_array_isToggle.traffic.error}}
@@ -157,7 +156,6 @@
                                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                         </ng-template>
                                     </ng-select>
-                                    Selected value: {{ selectedAge | json }}
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.age.error && my_array_isToggle.age.error!='error'">
                                             <small class="form-text text-danger">{{my_array_isToggle.age.error}}
@@ -174,8 +172,7 @@
                     <div class="list-button">
                         <button class="visibility-hidden"></button>
                         <button
-                                (click)="isStatusForm='offerAndInsightData'"
-                                (mouseover)="mouseoverErrorScale()"
+                                (click)="handleFirst()"
                                 type="submit"
                                 class="btn btn-primary btn-next"
                                 rippleEffect
@@ -208,7 +205,6 @@
                                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                         </ng-template>
                                     </ng-select>
-                                    Selected value: {{ selectedTags | json }}
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.tags.error && my_array_isToggle.tags.error!='error'">
                                             <small class="form-text text-danger">{{my_array_isToggle.tags.error}}</small>
@@ -248,7 +244,7 @@
                                             <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                                         </ng-template>
                                     </ng-select>
-                                    Selected value: {{ selectedCountry | json }}
+
 
                                     <div class="invalid-form">
                                         <ng-container *ngIf="my_array_isToggle.country.error && my_array_isToggle.country.error!='error'">
@@ -319,7 +315,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Offer</label>
-                                                        <select class="form-control" [(ngModel)]="statusOffer" required  name="statusOffer">
+                                                        <select class="form-control" [(ngModel)]="classfy" required  name="statusOffer">
                                                             <option value="0">-- Choose Offer --</option>
                                                             <option value="1">Offer hot</option>
                                                             <option value="2">Offer tiềm năng</option>
@@ -348,7 +344,7 @@
 
 <!--                            [disabled]="my_array_isToggle.tags.error || my_array_isToggle.payout.error || my_array_isToggle.country.error || my_array_isToggle.age.error"-->
                             <button
-                                    (click)="handleResult1()"
+                                    (click)="handleResult()"
                                     type="submit"
                                     class="btn btn-primary btn-next"
                                     rippleEffect

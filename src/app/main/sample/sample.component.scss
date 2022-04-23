@@ -506,3 +506,20 @@ input,select{
 .list-button-offer .button-offer:last-child{
   border-left: 1px solid #fff;
 }
+.notification{
+  padding: 40px 0;
+  color: #020202;
+}
+.list-button-notification{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .list-button-notification button{
+  margin: 0 10px;
+}
+  .message .list-button{
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+  }

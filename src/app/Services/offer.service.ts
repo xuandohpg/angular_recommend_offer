@@ -10,6 +10,6 @@ export class OfferService {
   constructor(private HttpClient:HttpClient) { }
 
   getOffer(data:any):Observable<any>{
-    return this.HttpClient.post<any>("http://localhost:8000/api/offer",data);
+    return this.HttpClient.post<any>("http://127.0.0.1:8000/api/offer",data);
   }
 }

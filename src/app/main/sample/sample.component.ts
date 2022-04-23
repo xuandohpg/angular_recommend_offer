@@ -36,8 +36,7 @@ export class SampleComponent implements OnInit {
     public payout:number;
     public trafficNetwork:string;
     public email:string;
-    // public tags:string='0';
-    // public country:string;
+
     public socialNetwork:string;
     public exp:string='0';
     public confirm:string;
@@ -53,7 +52,7 @@ export class SampleComponent implements OnInit {
     public cr:number;
     public ar:number;
     public epc:number;
-    public statusOffer:number=0;
+    public classfy:number=0;
 
     public quantity:number;
 
@@ -127,126 +126,10 @@ export class SampleComponent implements OnInit {
         this.ratio2=Math.floor(Math.random() * 11) + 70;
         this.ratio3=Math.floor(Math.random() * 21) + 50;
 
-        // Math.floor (Math.random () * 31) + 50
-        // let data_form={
-        //     tags: "Male Enhancement",
-        //     country: "",
-        //     age: 24,
-        //     traffic_network: "ekiwi",
-        //     exp: "1",
-        //     scale: "agency",
-        //     price:36
-        // };
-
-        // this.OfferService.getOffer(data_form).subscribe(data => {
-        //     this.listOffer = data;
-        //     this.lenghtListOffer = this.listOffer.length;
-        //     this.lengthFormData = 0;
-        // });
     }
 
 
     /////////////////////////////////////////////////////////////////// su kien keyup
-    onKeyEmail(event){
-        this.email=event.target.value;
-        if(!this.email){
-            this.my_array_isToggle.email.error='Email is required!';
-        }
-        else {
-            if (/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(this.email)) {
-                this.my_array_isToggle.email.error='';
-            }
-            else {
-                this.my_array_isToggle.email.error='Must be a valid email!';
-            }
-        }
-    }
-
-    onKeyTags(event){
-        this.tags=event.target.value;
-        if(!this.tags){
-            this.my_array_isToggle.tags.error='Tags is required!';
-        }
-        else {
-            if (/^[a-zA-Z& ]{4,50}$/.test(this.tags)) {
-                this.my_array_isToggle.tags.error='';
-            }
-            else {
-                this.my_array_isToggle.tags.error='Must be a valid tags!';
-            }
-        }
-    }
-
-    onKeyCountry(event){
-        this.country=event.target.value;
-        if(!this.country){
-            this.my_array_isToggle.country.error='Country is required!';
-        }
-        // else {
-        //     if (/^[a-zA-Z ]{4,50}$/.test(this.country)) {
-        //         this.my_array_isToggle.country.error='';
-        //     }
-        //     else {
-        //         this.my_array_isToggle.country.error='Must be a valid country!';
-        //     }
-        // }
-    }
-
-    onKeyAge(event){
-        // this.age=event.target.value;
-        // if(!this.age){
-        //     this.my_array_isToggle.age.error='Age is required!';
-        // }
-        // else {
-        //     if(this.age>=18 && this.age<=100){
-        //         this.my_array_isToggle.age.error='';
-        //     }
-        //     else {
-        //         this.my_array_isToggle.age.error='Must be a valid age!';
-        //     }
-        // }
-    }
-
-
-    onKeyTrafficNetwork(event){
-        // console.log('okkk');
-        if(!this.trafficNetwork){
-            this.my_array_isToggle.trafficNetwork.error='Traffic Network is required!';
-        }
-        else {
-            if (/^[a-zA-Z ]{4,50}$/.test(this.trafficNetwork)) {
-                this.my_array_isToggle.trafficNetwork.error='';
-            }
-            else {
-                this.my_array_isToggle.trafficNetwork.error='Must be a valid traffic network!';
-            }
-        }
-    }
-    // ngDoCheck(){
-    //     this.mouseoverErrorScale();
-    // }
-
-    mouseoverErrorScale(){
-        // if(this.exp=='0'){
-        //     this.my_array_isToggle.exp.error='Exp is required!';
-        // }
-        // else if(this.exp=='1' || this.exp=='2') {
-        //     this.my_array_isToggle.exp.error='';
-        // }
-        // else {
-        //     this.my_array_isToggle.exp.error='Must be a valid exp!';
-        // }
-        //
-        // if(this.scale=='0'){
-        //     this.my_array_isToggle.scale.error='Scale is required!';
-        // }
-        // else if(this.scale=='odd_pub' || this.scale=='agency') {
-        //     this.my_array_isToggle.scale.error='';
-        // }
-        // else {
-        //     this.my_array_isToggle.scale.error='Must be a valid scale!';
-        // }
-    }
 
     onKeyQuantity(event){
         if(!this.quantity){
@@ -273,7 +156,7 @@ export class SampleComponent implements OnInit {
                 this.my_array_isToggle.payout.error='';
             }
         }
-        console.log(this.my_array_isToggle.payout.error);
+
     }
     onKeyCr(event){
         if(!this.cr){
@@ -326,7 +209,6 @@ export class SampleComponent implements OnInit {
                 this.my_array_isToggle.traffic.error='';
             }
 
-            console.log("traffic-"+this.my_array_isToggle.traffic.error);
         }
         else if(value=='exp'){
             if(this.exp=='0'){
@@ -386,7 +268,7 @@ export class SampleComponent implements OnInit {
             else {
                 this.my_array_isToggle.country.error='';
             }
-            console.log(this.my_array_isToggle.country.error);
+
         }
         else if(value=='type'){
             if(this.type=='0'){
@@ -410,7 +292,7 @@ export class SampleComponent implements OnInit {
             }
         }
         else if(value=="ar"){
-            console.log('click');
+
             if(!this.ar){
                 this.my_array_isToggle.ar.error='';
             }
@@ -438,114 +320,124 @@ export class SampleComponent implements OnInit {
         }
 
 
-
-
-        else if(value=='scale'){
-            if(this.scale=='0'){
-                this.my_array_isToggle.scale.error='Scale is required!';
-            }
-            else{
-                this.my_array_isToggle.scale.error='';
-            }
-        }
-
-        else if(value=='trafficNetwork'){
-            if(!this.trafficNetwork){
-                this.my_array_isToggle.trafficNetwork.error='Traffic Network is required!';
-            }
-            else {
-                if (/^[a-zA-Z ]{4,50}$/.test(this.trafficNetwork)) {
-                    this.my_array_isToggle.trafficNetwork.error='';
-                }
-                else {
-                    this.my_array_isToggle.trafficNetwork.error='Must be a valid traffic network!';
-                }
-            }
-        }
-        else if(value=='email'){
-            if(!this.email){
-                this.my_array_isToggle.email.error='Email is required!';
-            }
-            else {
-                if (/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(this.email)) {
-                    this.my_array_isToggle.email.error='';
-                }
-                else {
-                    this.my_array_isToggle.email.error='Must be a valid email!';
-                }
-            }
-        }
     }
 
     /////////////////////////////////////////////////////////////////////// xu ly
-    handleResult1(){
-        console.log('ok');
-        console.log('select traffic');
-        console.log(this.selectedTraffic);
-        console.log('exp-'+this.exp);
-        console.log('quantity-'+this.quantity);
-        console.log('age');
-        console.log(this.selectedAge);
-        console.log('linh vuc');
-        console.log(this.selectedTags);
+    handleFirst(){
+        // isStatusForm='offerAndInsightData'
 
-        console.log('hoa hong-'+this.payout);
-        console.log('country');
-        console.log(this.selectedCountry);
-        console.log('type-'+this.type);
-        console.log('ar-'+this.ar);
-        console.log('cr-'+this.cr);
-        console.log('epc-'+this.epc);
-        console.log('status offer-'+this.statusOffer);
+        if(this.selectedTraffic.length<=0){
+            this.my_array_isToggle.traffic.error='Traffic is required!';
+        }
 
+        if(!this.quantity){
+            this.my_array_isToggle.quantity.error='Quantity is required!';
+        }
+        else {
+            if(isNaN(this.quantity)){
+                this.my_array_isToggle.quantity.error='Must be a valid quantity!';
+            }
+        }
+
+        if(this.selectedAge.length<=0){
+            this.my_array_isToggle.age.error='Age is required!';
+        }
+        if(this.exp=='0'){
+            this.my_array_isToggle.exp.error='Exp is required!';
+        }
+
+        if(!this.my_array_isToggle.traffic.error && !this.my_array_isToggle.quantity.error && !this.my_array_isToggle.age.error && !this.my_array_isToggle.exp.error){
+            this.isStatusForm='offerAndInsightData';
+        }
     }
-    handleResult(){
-        let scale:any;
-            this.isLoading=true;
-            setTimeout(() => {
 
-                this.isLoading=false;
-                    let data_form={
-                        tags: this.tags,
-                        // country: this.country.toLowerCase(),
-                        age : this.age,
-                        traffic_network : this.trafficNetwork.toLowerCase(),
-                        exp : this.exp,
-                        scale : this.scale,
-                        payout : this.payout
+    handleResult(){
+
+        if(this.type=='0'){
+            this.my_array_isToggle.type.error='Type is required!';
+        }
+
+        if(this.selectedCountry.length<=0){
+            this.my_array_isToggle.country.error='Country is required!';
+        }
+
+        if(this.selectedTags.length<=0){
+            this.my_array_isToggle.tags.error='Tags is required!';
+        }
+
+        if(!this.my_array_isToggle.type.error && !this.my_array_isToggle.country.error && !this.my_array_isToggle.tags.error){
+            if(!this.my_array_isToggle.payout.error && !this.my_array_isToggle.ar.error && !this.my_array_isToggle.cr.error && !this.my_array_isToggle.epc.error && !this.my_array_isToggle.type.error){
+                this.isLoading=true;
+                setTimeout(() => {
+                    this.isLoading=false;
+                    if(!this.payout) this.payout=0;
+                    if(!this.ar) this.ar=0;
+                    if(!this.cr) this.cr=0;
+                    if(!this.epc) this.epc=0;
+
+                    var data_create={
+                        age:this.selectedAge.join(),
+                        ar: this.ar,
+                        classfy: this.classfy,
+                        country:this.selectedCountry.join(),
+                        cr: this.cr,
+                        epc: this.epc,
+                        exp: this.exp,
+                        payout: this.payout,
+                        quantity: this.quantity,
+                        tags:this.selectedTags.join(),
+                        traffic:this.selectedTraffic.join(),
+                        type:this.type
                     };
-                    // console.log(data_form);
-                this.OfferService.getOffer(data_form).subscribe(data => {
-                    this.listOffer = data;
-                    this.lenghtListOffer = this.listOffer.length;
-                    if(this.lenghtListOffer<=0){
-                        this.listOffer={message:"No data"};
+
+                    var data={
+                        traffic:this.selectedTraffic,
+                        exp: this.exp,
+                        age: this.selectedAge,
+                        tags: this.selectedTags,
+                        country: this.selectedCountry,
+                        type:this.type,
+                        quantity:this.quantity,
+                        payout:this.payout,
+                        ar:this.ar,
+                        cr:this.cr,
+                        epc:this.epc,
+                        classfy:this.classfy
                     }
-                    else if(this.idFormData!=0) {
-                            this.FormDataService.editFormData(this.idFormData, data_form).subscribe(data=>{
+
+                    this.OfferService.getOffer(data).subscribe(data => {
+                        this.listOffer = data;
+                        this.lenghtListOffer = this.listOffer.length;
+                        if(this.lenghtListOffer<=0) {
+                        }
+                        
+                        else if(this.idFormData!=0) {
+                            this.FormDataService.editFormData(this.idFormData, data_create).subscribe(data=>{
                             });
-                    }
-                    else{
-                        let data_form={
-                            email:"xuando199888@gmail.com",
-                            tags: this.tags,
-                            // country: this.country.toLowerCase(),
-                            age : this.age,
-                            traffic_network : this.trafficNetwork.toLowerCase(),
-                            exp : this.exp,
-                            scale : this.scale,
-                            payout : this.payout
-                        };
-                        // this.FormDataService.createFormData(data_form).subscribe(data=>{});
-                    }
-                });
-                this.isStatusForm='finish';
-            }, 1600);
+                        }
+                        else{
+                            if(!this.email){
+                                this.email="dovando@gmail.com";
+                            }
+                            data_create['email']=this.email;
+                            this.FormDataService.createFormData(data_create).subscribe(data=>{});
+                        }
+                    });
+                    this.isStatusForm='finish';
+                }, 1600)
+            }
+        }
+
     }
 
     onBackTo(){
         this.lenghtListOffer=undefined;
         this.isStatusForm='general';
+
+        if(this.payout==0) this.payout=undefined;
+        if(this.ar==0) this.ar=undefined;
+        if(this.cr==0) this.cr=undefined;
+        if(this.epc==0) this.epc=undefined;
     }
     onClickNo(){
         this.isStatusForm='finish';
@@ -554,13 +446,18 @@ export class SampleComponent implements OnInit {
             this.isLoading=false;
             this.FormDataService.getFormDataById(this.idFormData).subscribe(data => {
                 let data_form = {
-                    tags: data.tags,
-                    country: data.country,
-                    age: data.age,
-                    traffic_network: data.traffic_network,
+                    age:data.age.split(","),
+                    ar: data.ar,
+                    classfy: data.classfy,
+                    country:data.country.split(","),
+                    cr: data.cr,
+                    epc: data.epc,
                     exp: data.exp,
-                    scale:data.scale,
-                    payout:data.payout,
+                    payout: data.payout,
+                    quantity: data.quantity,
+                    tags:data.tags.split(","),
+                    traffic:data.traffic.split(","),
+                    type:data.type
                 };
 
                 this.OfferService.getOffer(data_form).subscribe(data => {
@@ -572,29 +469,13 @@ export class SampleComponent implements OnInit {
         },1600);
     }
     onClickYes(){
-        for(let index in this.my_array_isToggle){
-            this.my_array_isToggle[index].error='';
-        }
         this.isOnYes=true;
         this.lengthFormData=0;
         this.isActiveForm=false;
-        setTimeout(() => {
-            this.isActiveForm=true;
-        }, 6000);
-
-        this.FormDataService.getFormDataById(this.idFormData).subscribe(data => {
-            this.tags=data.tags;
-            this.country=data.country;
-            this.age=data.age;
-            this.trafficNetwork=data.traffic_network;
-            this.exp=data.exp;
-            this.payout=data.payout;
-            this.scale=data.scale;
-        });
     }
 
     ngOnInit() {
-        this.listTags=this.TagsService.getListTags().info;
+        // this.listTags=this.TagsService.getListTags().info;
         // this.TagsService.getListTags().subscribe(data=>{
         //     console.log(data);
         // });
@@ -612,20 +493,9 @@ export class SampleComponent implements OnInit {
             });
         }
 
-        setTimeout(() => {
-            this.isActiveForm=true;
-        }, 6000);
-
         this.my_array_isToggle={
             payout:{
-                error:'error',
-            },
-            scale:{
-                error:'error',
-            },
-
-            trafficNetwork:{
-                error:'error',
+                error:'',
             },
             email:{
                 error:'error',
@@ -652,17 +522,14 @@ export class SampleComponent implements OnInit {
                 error:'error',
             },
             cr:{
-                error:'error',
+                error:'',
             },
             ar:{
-                error:'error',
+                error:'',
             },
             epc:{
-                error:'error',
+                error:'',
             },
-            statusOffer:{
-                error:'error',
-            }
 
         }
 
